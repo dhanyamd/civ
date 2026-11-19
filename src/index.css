@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-stone-100 font-sans text-stone-900;
+  }
+
+  /* Numbers line up in the quantity tables. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* Quieter scrollbars in the two side rails. */
+  aside::-webkit-scrollbar {
+    width: 6px;
+  }
+  aside::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  aside::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-stone-300;
+  }
+  aside::-webkit-scrollbar-thumb:hover {
+    @apply bg-stone-400;
+  }
+}
