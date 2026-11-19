@@ -214,11 +214,15 @@ export function ModelLibrary({
         >
           <Upload className="h-5 w-5 text-stone-500" aria-hidden="true" />
           <p className="text-sm font-semibold text-stone-800">Drop an .ifc or .glb model</p>
-          <p className="text-xs text-stone-600">or click to choose a file</p>
+          <p className="text-xs text-stone-600">or click to choose a file · from Revit, export as IFC</p>
+          {/*
+            .rvt is listed so the picker offers it and the handler can explain the
+            IFC export, rather than the file being invisible to the user.
+          */}
           <input
             ref={inputRef}
             type="file"
-            accept=".glb,.gltf,.ifc"
+            accept=".glb,.gltf,.ifc,.rvt"
             className="hidden"
             onChange={(e) => {
               const file = e.target.files?.[0];

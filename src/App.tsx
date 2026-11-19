@@ -76,6 +76,15 @@ export default function App() {
   const handleUploadFile = (file: File) => {
     const name = file.name.toLowerCase();
     const isIfc = name.endsWith('.ifc');
+    // .rvt is Autodesk's closed format — no open parser exists, so the file
+    // cannot be read here at all. IFC is Revit's own open export and carries
+    // the materials this app needs, so point there rather than just refusing.
+    if (name.endsWith('.rvt')) {
+      setUploadError(
+        'Native Revit files can only be opened by Revit itself. In Revit: File → Export → IFC, then drop the .ifc here — the export keeps the material of every element, which is what this app reads.',
+      );
+      return;
+    }
     if (!isIfc && !name.endsWith('.glb') && !name.endsWith('.gltf')) {
       setUploadError('Choose an .ifc file, or a single .glb. A .gltf with separate textures will not load on its own.');
       return;
