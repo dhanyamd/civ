@@ -205,7 +205,7 @@ export async function handleInsight(body, config) {
       status: 503,
       body: {
         error:
-          'No AI key on the server. Add OPENROUTER_API_KEY (or GROQ_API_KEY) to .env and restart, then reload this page.',
+          'No AI key on the server. Set OPENROUTER_API_KEY (or GROQ_API_KEY) in the server environment — .env locally, the host\'s dashboard when deployed — then reload this page.',
       },
     };
   }
