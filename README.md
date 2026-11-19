@@ -160,8 +160,21 @@ Any Node host:
 
 ```bash
 npm run build
-PORT=8080 GROQ_API_KEY=gsk_... npm start
+PORT=8080 OPENROUTER_API_KEY=sk-or-v1-... npm start
 ```
 
-Serves the built SPA and `/api` from one process. Set `GROQ_API_KEY` as an
-environment variable in the host's dashboard rather than shipping `.env`.
+Serves the built SPA and `/api` from one process. Set the key as an environment
+variable in the host's dashboard rather than shipping `.env`.
+
+On Vercel there is no long-running process, so `/api` runs as two functions
+instead — `api/insight.js` and `api/health.js`, thin wrappers over the same
+`server/insight.mjs`. `vercel.json` builds `dist/` and rewrites every non-`/api`
+path to `index.html` for the SPA.
+
+```bash
+vercel login
+vercel --prod            # set OPENROUTER_API_KEY in the dashboard first
+```
+
+`vercel deploy --temporary` deploys with no account, but the resulting URL is
+firewall-blocked until claimed, so it is only useful as a build check.
